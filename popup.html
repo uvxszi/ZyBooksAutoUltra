@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ZyBooks AutoUltra</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <header><div class="brand">ZU<span>✦</span></div><div><h1>ZyBooks AutoUltra</h1><p>Your activity workspace. <span class="version">1.7.1</span></p></div><button id="power" class="power" aria-label="Turn off extension" aria-pressed="true" title="Turn off extension">⏻</button></header>
+  <main>
+    <nav class="workspace-tabs" aria-label="Workspace"><span>Activities</span><button id="models">Models ↗</button></nav>
+    <p id="model-summary" class="hint">No AI model selected.</p>
+    <button id="open-prompt" class="primary">Open question workspace →</button>
+    <p class="hint">Paste a question, ask your model, and copy the answer.</p>
+    <section class="status-card"><div class="eyebrow"><span id="dot"></span> THIS PAGE</div><h2 id="phase">Connecting…</h2><p id="current">Open a zyBooks section to begin.</p><div id="counts" class="counts"></div></section>
+    <div class="actions"><button id="run" class="primary" disabled>Run this page <span>→</span></button><button id="stop" disabled>Stop</button></div>
+    <div class="actions"><button id="allow-frames" type="button" hidden>Allow embedded elements</button><button id="disallow-frames" type="button" hidden>Disallow embedded elements</button></div>
+    <p class="hint" id="frame-note" hidden>Lets Copy Element select text and dropdowns inside embedded activities. You can revoke the additional site access here.</p>
+    <label class="toggle"><span><strong>Continue through this chapter</strong><small>Follow next sections; stop before the next chapter</small></span><input id="autoChapter" type="checkbox"></label>
+    <label class="toggle"><span><strong>Continue to next chapter</strong><small>When chapter continuation is on, keep going across chapters</small></span><input id="nextChapter" type="checkbox"></label>
+    <label class="toggle"><span><strong>Stop before optional content</strong><small>Stop at chapters or sections labeled Optional</small></span><input id="stopOptional" type="checkbox" checked></label>
+    <p class="hint">Uses page controls. Closing this popup keeps the run going.</p>
+    <fieldset><legend>Activities to run</legend>
+      <label class="toggle"><span><strong>Participation activities</strong><small>Enable the participation types below</small></span><input id="participation" type="checkbox" checked></label>
+      <label class="toggle"><span><strong>Revealed answers</strong><small>Show answer → fill → check</small></span><input id="short" type="checkbox" checked></label>
+      <label class="toggle"><span><strong>Multiple choice</strong><small>Try choices until Correct appears</small></span><input id="choice" type="checkbox" checked></label>
+      <label class="toggle"><span><strong>Animations</strong><small>2x speed, start, and continue</small></span><input id="animation" type="checkbox" checked></label>
+      <label class="toggle"><span><strong>Term matching</strong><small>Try remaining terms; keep correct matches</small></span><input id="matching" type="checkbox" checked></label>
+      <label class="toggle"><span><strong>Interactive tools</strong><small>Array games, slicing, and Run examples</small></span><input id="tools" type="checkbox" checked></label>
+    </fieldset>
+    <label>Unload idle AI model after<select id="modelIdleMinutes"><option value="1">1 minute</option><option value="3">3 minutes</option><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="0">Keep loaded until turned off</option></select></label>
+    <p class="hint">Turn Off always releases model memory. Downloaded files stay installed.</p>
+    <details id="timing"><summary>Timing & waiting <span id="delay-label">0.4–0.8s between problems</span></summary>
+      <div class="timing-grid"><label>Base delay (ms)<input id="baseMs" type="number" min="0" max="10000" step="50" value="300"></label><label>Random minimum (ms)<input id="jitterMinMs" type="number" min="0" max="10000" step="50" value="100"></label><label>Random maximum (ms)<input id="jitterMaxMs" type="number" min="0" max="10000" step="50" value="500"></label><label>Feedback timeout (ms)<input id="feedbackMs" type="number" min="1000" max="30000" step="1000" value="6000"></label><label>Animation timeout (ms)<input id="animationMs" type="number" min="10000" max="600000" step="10000" value="180000"></label><label>After-page wait (seconds)<input id="afterPageSeconds" type="number" min="0" max="120" step="1" value="5"></label><label>LMS timeout (seconds)<input id="lmsWaitSeconds" type="number" min="10" max="180" step="1" value="60"></label></div>
+      <p class="hint">Actual timing also includes feedback and playback waits. Settings apply to the next run.</p>
+    </details>
+    <label class="toggle"><span><strong>Developer mode</strong><small>Show inspection tools and diagnostic reports</small></span><input id="developerMode" type="checkbox"></label>
+    <div id="developer" hidden><section class="diagnostics"><div class="section-heading"><h2>Diagnostics</h2><span>LOCAL ONLY</span></div><p>Inspect an activity and export a troubleshooting report.</p><div class="actions"><button id="pick" disabled>Pick activity</button><button id="copy" disabled>Copy diagnostics</button></div><p class="hint">Includes activity text and controls. Form values, scripts, cookies, and storage are excluded.</p><textarea id="report" aria-label="Diagnostic report" readonly hidden></textarea><button id="download" hidden>Save report as a file</button></section>
+    <details><summary>Recent activity</summary><ol id="logs"></ol></details></div>
+    <p id="notice" role="status" aria-live="polite"></p>
+  </main>
+  <footer>Made by uvxszi · <a href="privacy.html" target="_blank">Privacy & support</a></footer>
+  <script src="core.js"></script>
+  <script src="popup.js"></script>
+</body></html>
